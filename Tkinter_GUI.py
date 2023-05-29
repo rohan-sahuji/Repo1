@@ -10,8 +10,6 @@ class School_Data:
 
         self.root.mainloop()
 
-        self.connect = SQL_Connect.connection_sql('C:\Users\rsahu\Documents\git_files\Repo1')
-
     def home(self):
 
         self.label = tk.Label(self.root, text="Sample School Data", font=("Arial", 24))
@@ -23,8 +21,8 @@ class School_Data:
         self.btnframe = tk.Frame(self.root)
         self.btnframe.columnconfigure(0, weight = 1)
         
-        self.add = tk.Button(self.btnframe, text="Add", font=("Arial", 16), command=self.add)
-        self.add.grid(row=0, column=0, sticky=tk.W + tk.E)
+        self.addbtn = tk.Button(self.btnframe, text="Add", font=("Arial", 16), command=self.add)
+        self.addbtn.grid(row=0, column=0, sticky=tk.W + tk.E)
 
         self.search = tk.Button(self.btnframe, text="Search", font=("Arial", 16))
         self.search.grid(row=0, column=1, sticky=tk.W + tk.E)
@@ -63,14 +61,15 @@ class School_Data:
 
         self.addframe.pack(padx=10, pady=10)
 
-        self.gui_elements = [self.label, self.addframe]
+        self.enter = tk.Button(self.btnframe, text="Add", font=("Arial", 16), command=SQL_Connect.connection_sql)
+        self.enter.pack(padx=10, pady=10)
+
+        self.gui_elements = [self.label, self.addframe, self.enter]
 
 
     def gui_elements_remove(self, gui_elements):
 
         for elements in gui_elements:
-            elements.destroy()
+            elements.destroy() 
 
-
-
-obj = School_Data()
+School_Data()
