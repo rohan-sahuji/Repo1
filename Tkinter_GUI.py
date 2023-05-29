@@ -1,4 +1,5 @@
 import tkinter as tk
+import SQL_Connect
 
 class School_Data:
     def __init__(self):
@@ -8,6 +9,8 @@ class School_Data:
         self.home()
 
         self.root.mainloop()
+
+        self.connect = SQL_Connect.connection_sql('C:\Users\rsahu\Documents\git_files\Repo1')
 
     def home(self):
 
