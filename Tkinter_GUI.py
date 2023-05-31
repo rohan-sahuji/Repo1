@@ -2,6 +2,8 @@
 import tkinter as tk
 import sqlite3
 from sqlite3 import Error
+from PIL import Image, ImageTk
+from tkinter import messagebox
 
 # Making things object oriented, define a class.
 class School_Data:
@@ -19,16 +21,21 @@ class School_Data:
         self.label = tk.Label(self.root, text="Sample School Data", font=("Arial", 24))
         self.label.pack(padx=20, pady=20)
 
-        self.textbox = tk.Text(self.root, height=5, font=("Arial", 12))
-        self.textbox.pack(padx=10, pady=10)
+        image = Image.open("school_image.jpg")
+        image = image.resize((800,300))
+        self.photo = ImageTk.PhotoImage(image)
+        image_label = tk.Label(self.root, image=self.photo)
+        image_label.pack(padx=10, pady=10)
 
         self.add_button("Add", self.add)
         self.add_button("Search", self.search)
         self.add_button("Extra", self.extra)
 
-    def add_button(self, text, command):
-        button = tk.Button(self.root, text=text, font=("Arial", 16), command=command)
+    def add_button(self, text, *commands):
+        button = tk.Button(self.root, text=text, font=("Arial", 16))
         button.pack(padx=10, pady=10)
+        for command in commands:
+            button.config(command = lambda c=command: c())
         return button
     
     #The add method contains all widgets and functions to be applied in 'ADD' screen of the 
@@ -47,10 +54,8 @@ class School_Data:
         self.create_label_and_entry(self.addframe, "Age", 1, "Age", "")
         self.create_label_and_entry(self.addframe, "Class", 2, "Class", "")
 
-        self.enter = self.add_button("Add", self.connection_add)
-
-        self.back = tk.Button(self.root, text="Home", font=("Arial", 16), command=lambda: [self.clear_screen(), self.back.destroy(), self.home()])
-        self.back.pack(padx=10, pady=10)
+        self.add_button("Add", self.connection_add)
+        self.add_button("Home", self.home)
 
     def search(self):
         # Firsty remove widgets of the homescreen
@@ -71,10 +76,8 @@ class School_Data:
         self.search_value = tk.Text(self.searchframe, height=1, font=("Arial", 12))
         self.search_value.grid(row=1, column=1)
 
-        self.search_button = self.add_button("Search", self.connection_search)
-
-        self.back = tk.Button(self.root, text="Home", font=("Arial", 16), command=lambda: [self.clear_screen(), self.home()])
-        self.back.pack(padx=10, pady=10)
+        self.add_button("Search", self.connection_search)
+        self.add_button("Home", self.home)
 
     def create_label_and_entry(self, parent, text, row, entry_name, default_value):
         label = tk.Label(parent, text=text, font=("Arial", 14))
@@ -111,6 +114,7 @@ class School_Data:
             cursor.execute(data_insert, data_insert_tuple)
             connection.commit()
             connection.close()
+            messagebox.showinfo(title='Congratulations!', message='Entry added Successfully!')
         
         except Error as e:
             print(e)
@@ -145,8 +149,6 @@ class School_Data:
                 label = tk.Label(self.dispframe, text=value, font=("Arial", 14))
                 label.grid(row=i, column=j)
 
-            
-    
     def extra(self):
         # Add your additional functionality here
         pass

@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 
+
 def connection_sql():
     connection = None
     try:
