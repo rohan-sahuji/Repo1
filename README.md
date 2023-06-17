@@ -1,7 +1,7 @@
 # Repo1
 This Repo is exposure to working with github and git with python project.
 
-This is a project of building a GUI storing data of a sample school students with help of tkinter library into an SQL Database.
+This is a project of building a GUI to store data of students of a sample school with the help of tkinter library into an SQL Database.
 
 ![School Data](school_image.jpg)
 The project is able to:
