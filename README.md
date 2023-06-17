@@ -11,3 +11,9 @@ The project is able to:
 4. Delete entries
 
 The data stored in this project is name, age and class of the students. Further details and functionalities can be added as per requirement.
+
+Content of the Repository:
+1. README file
+2. Tkinter_GUI.py - the source code for the project
+3. data.db - Sample SQL Database created while working on building the project
+4. school_image.jpg - Sample image file for Home screen
